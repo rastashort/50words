@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 words IUT UNC</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+</head>
+<body>
+    <div id="map"></div>
+
+
+    <script>
+
+        //Création du tableau des langue
+        //Mot en Français
+        const mot_fr ={
+           "mots": [
+                {
+                    "id": 1,
+                    "mot": "Bonjour ! (salutation du matin)"
+                },
+                {
+                    "id": 2,
+                    "mot": "Bonsoir ! (salutation du soir)"
+                },
+                {
+                    "id": 3,
+                    "mot": "Merci"
+                },
+                {
+                    "id": 4,
+                    "mot": "Aurevoir, à bientôt"
+                },
+                {
+                    "id": 5,
+                    "mot": "Pardon, excusez-moi"
+                },
+                {
+                    "id": 6,
+                    "mot": "Tête"
+                },
+                {
+                    "id": 7,
+                    "mot": "Visage"
+                },
+                {
+                    "id": 8,
+                    "mot": "Cheveux"
+                },
+                {
+                    "id": 9,
+                    "mot": "Pied"
+                },
+                {
+                    "id": 10,
+                    "mot": "Main"
+                },{
+                    "id": 11,
+                    "mot": "Bouche"
+                },
+                {
+                    "id": 12,
+                    "mot": "Nez"
+                },
+                {
+                    "id": 13,
+                    "mot": "Oeil / yeux"
+                },
+                {
+                    "id": 14,
+                    "mot": "Oreille"
+                },
+                {
+                    "id": 15,
+                    "mot": "Ventre"
+                },
+                {
+                    "id": 16,
+                    "mot": "Dos"
+                },
+                {
+                    "id": 17,
+                    "mot": "Parler"
+                },
+                {
+                    "id": 18,
+                    "mot": "Manger"
+                },
+                {
+                    "id": 19,
+                    "mot": "Boire"
+                },
+                {
+                    "id": 20,
+                    "mot": "Dormir"
+                },
+                {
+                    "id": 21,
+                    "mot": "Travailler"
+                },
+                {
+                    "id": 22,
+                    "mot": "Pêcher"
+                },
+                {
+                    "id": 23,
+                    "mot": "Chasser"
+                },
+                {
+                    "id": 24,
+                    "mot": "Danser"
+                },
+                {
+                    "id": 25,
+                    "mot": "Marcher, aller"
+                },
+                {
+                    "id": 26,
+                    "mot": "Cuisiner, faire la cuisine"
+                },
+                {
+                    "id": 27,
+                    "mot": "Cochon"
+                },
+                {
+                    "id": 28,
+                    "mot": "Poule, coq, poulet"
+                },
+                {
+                    "id": 29,
+                    "mot": "Rousette"
+                },
+                {
+                    "id": 30,
+                    "mot": "Oiseau"
+                },
+                {
+                    "id": 31,
+                    "mot": "Poisson"
+                },
+                {
+                    "id": 32,
+                    "mot": "Cheval"
+                },
+                {
+                    "id": 33,
+                    "mot": "Chien"
+                },
+                {
+                    "id": 34,
+                    "mot": "Chat"
+                },
+                {
+                    "id": 35,
+                    "mot": "Âne"
+                },
+                {
+                    "id": 36,
+                    "mot": "Baleine"
+                },
+                {
+                    "id": 37,
+                    "mot": "Requin"
+                },
+                {
+                    "id": 38,
+                    "mot": "Tortue"
+                },
+                {
+                    "id": 39,
+                    "mot": "Vache"
+                },
+                {
+                    "id": 40,
+                    "mot": "Poux"
+                },
+                {
+                    "id": 41,
+                    "mot": "Igname"
+                },
+                {
+                    "id": 42,
+                    "mot": "Taro"
+                },
+                {
+                    "id": 43,
+                    "mot": "Patate douce"
+                },
+                {
+                    "id": 44,
+                    "mot": "Manioc"
+                },
+                {
+                    "id": 45,
+                    "mot": "Banane"
+                },
+                {
+                    "id": 46,
+                    "mot": "Canne à sucre"
+                },
+                {
+                    "id": 47,
+                    "mot": "coco"
+                },
+                {
+                    "id": 48,
+                    "mot": "Téléphone"
+                },
+                {
+                    "id": 49,
+                    "mot": "École"
+                },
+                {
+                    "id": 50,
+                    "mot": "Église / temple"
+                },
+           ]
+        };
+        // Mot en ajie
+        const ajie = {
+            "mots_ajie": [
+                {
+                    "id": 1,
+                    "mot_ajie": "Böyu",
+                    "audio_ajie": "audio/ajie/Bonjour_Ajië"
+                },
+                {
+                    "id": 2,
+                    "mot_ajie": "Ârikè na e",
+                    "audio_ajie": "audio/ajie/Bonsoir_ajië"
+                },
+                {
+                    "id": 3,
+                    "mot_ajie": "Ëi",
+                    "audio_ajie": "audio/ajie/Merci_ajië"
+                },
+                {
+                    "id": 4,
+                    "mot_ajie": "Gaara",
+                    "audio_ajie": "audio/ajie/Au-revoir_ajië"
+                },
+                {
+                    "id": 5,
+                    "mot_ajie": "Gô pèyari nyâ",
+                    "audio_ajie": "audio/ajie/Excue-moi_ajië"
+                },
+                {
+                    "id": 6,
+                    "mot_ajie": "Gwâ",
+                    "audio_ajie": "audio/ajie/Tete_ajië"
+                },
+                {
+                    "id": 7,
+                    "mot_ajie": "Wêêmèè",
+                    "audio_ajie": "audio/ajie/Visage_ajië"
+                },
+                {
+                    "id": 8,
+                    "mot_ajie": "Pûrû gwâ",
+                    "audio_ajie": "audio/ajie/Cheveux_ajië"
+                },
+                {
+                    "id": 9,
+                    "mot_ajie": "Kowi xè ria",
+                    "audio_ajie": "audio/ajie/Pied_ajië"
+                },
+                {
+                    "id": 10,
+                    "mot_ajie": "Kowi xè ria",
+                    "audio_ajie": "audio/ajie/Main_ajië"
+                },
+                {
+                    "id": 11,
+                    "mot_ajie": "Néwâ",
+                    "audio_ajie": "audio/ajie/Bouche_ajië"
+                },
+                {
+                    "id": 12,
+                    "mot_ajie": "Kwî",
+                    "audio_ajie": "audio/ajie/Nez_ajië"
+                },
+                {
+                    "id": 13,
+                    "mot_ajie": "Piémè",
+                    "audio_ajie": "audio/ajie/Oeil_ajië"
+                },
+                {
+                    "id": 14,
+                    "mot_ajie": "Bödê",
+                    "audio_ajie": "audio/ajie/Oreille_ajië"
+                },
+                {
+                    "id": 15,
+                    "mot_ajie": "Léwé",
+                    "audio_ajie": "audio/ajie/Ventre_ajië"
+                },
+                {
+                    "id": 16,
+                    "mot_ajie": "Déé",
+                    "audio_ajie": "audio/ajie/Dos_ajië"
+                },
+                {
+                    "id": 17,
+                    "mot_ajie": "Tëvë",
+                    "audio_ajie": "audio/ajie/Parler_ajië"
+                },
+                {
+                    "id": 18,
+                    "mot_ajie": "Ara",
+                    "audio_ajie": "audio/ajie/Manger_ajië"
+                },
+                {
+                    "id": 19,
+                    "mot_ajie": "Wâyö",
+                    "audio_ajie": "audio/ajie/Boire_ajië"
+                },
+                {
+                    "id": 20,
+                    "mot_ajie": "Kûrû",
+                    "audio_ajie": "audio/ajie/Dormir_ajië"
+                },
+                {
+                    "id": 21,
+                    "mot_ajie": "Wakè",
+                    "audio_ajie": "audio/ajie/Travailler_ajië"
+                },
+                {
+                    "id": 22,
+                    "mot_ajie": "Kwâna",
+                    "audio_ajie": "audio/ajie/Pêcher_ajië"
+                },
+                {
+                    "id": 23,
+                    "mot_ajie": "Kwâna",
+                    "audio_ajie": "audio/ajie/Chasser_ajië"
+                },
+                {
+                    "id": 24,
+                    "mot_ajie": "Kwè",
+                    "audio_ajie": "audio/ajie/Danser_ajië"
+                },
+                {
+                    "id": 25,
+                    "mot_ajie": "Vârâ",
+                    "audio_ajie": "audio/ajie/Marcher_ajië"
+                },
+                {
+                    "id": 26,
+                    "mot_ajie": "Vö",
+                    "audio_ajie": "audio/ajie/Cuisiner_ajië"
+                },
+                {
+                    "id": 27,
+                    "mot_ajie": "Poka",
+                    "audio_ajie": "audio/ajie/Cochon_ajië"
+                },
+                {
+                    "id": 28,
+                    "mot_ajie": "Méyë",
+                    "audio_ajie": "audio/ajie/Poule_ajië"
+                },
+                {
+                    "id": 29,
+                    "mot_ajie": "Mèu",
+                    "audio_ajie": "audio/ajie/Roussette_ajië"
+                },
+                {
+                    "id": 30,
+                    "mot_ajie": "Mürü",
+                    "audio_ajie": "audio/ajie/Oiseau_ajië"
+                },
+                {
+                    "id": 31,
+                    "mot_ajie": "Êwâ",
+                    "audio_ajie": "audio/ajie/Poisson_ajië"
+                },
+                {
+                    "id": 32,
+                    "mot_ajie": "Yovari",
+                    "audio_ajie": "audio/ajie/Cheval_ajië"
+                },
+                {
+                    "id": 33,
+                    "mot_ajie": "Lova",
+                    "audio_ajie": "audio/ajie/Chien_ajië"
+                },
+                {
+                    "id": 34,
+                    "mot_ajie": "Puyi",
+                    "audio_ajie": "audio/ajie/Chat_ajië"
+                },
+                {
+                    "id": 35,
+                    "mot_ajie": "Bwârâwê",
+                    "audio_ajie": "audio/ajie/Ane_ajië"
+                },
+                {
+                    "id": 36,
+                    "mot_ajie": "Döyaa",
+                    "audio_ajie": "audio/ajie/Baleine_ajië"
+                },
+                {
+                    "id": 37,
+                    "mot_ajie": "Coé",
+                    "audio_ajie": "audio/ajie/Requin_ajië"
+                },
+                {
+                    "id": 38,
+                    "mot_ajie": "Pwê",
+                    "audio_ajie": "audio/ajie/Tortue_ajië"
+                },
+                {
+                    "id": 39,
+                    "mot_ajie": "Pôrômäkau",
+                    "audio_ajie": "audio/ajie/Vache_ajië"
+                },
+                {
+                    "id": 40,
+                    "mot_ajie": "Kúrú",
+                    "audio_ajie": "audio/ajie/Poux_ajië"
+                },
+                {
+                    "id": 41,
+                    "mot_ajie": "Meu",
+                    "audio_ajie": "audio/ajie/Igname_ajië"
+                },
+                {
+                    "id": 42,
+                    "mot_ajie": "Mwa",
+                    "audio_ajie": "audio/ajie/Taro_ajië"
+                },
+                {
+                    "id": 43,
+                    "mot_ajie": "Kumwârâ",
+                    "audio_ajie": "audio/ajie/Patate-douce_ajië"
+                },
+                {
+                    "id": 44,
+                    "mot_ajie": "Mânyö",
+                    "audio_ajie": "audio/ajie/Manioc_ajië"
+                },
+                {
+                    "id": 45,
+                    "mot_ajie": "Kwinjèi",
+                    "audio_ajie": "audio/ajie/Banane_ajië"
+                },
+                {
+                    "id": 46,
+                    "mot_ajie": "Waré",
+                    "audio_ajie": "audio/ajie/Canne-a-sucre_ajië"
+                },
+                {
+                    "id": 47,
+                    "mot_ajie": "Nu",
+                    "audio_ajie": "audio/ajie/Coco_ajië"
+                },
+                {
+                    "id": 48,
+                    "mot_ajie": "Vao",
+                    "audio_ajie": "audio/ajie/Telephone_ajië"
+                },
+                {
+                    "id": 49,
+                    "mot_ajie": "Mwayupéci",
+                    "audio_ajie": "audio/ajie/Ecole_ajië"
+                },
+                {
+                    "id": 50,
+                    "mot_ajie": "Mwâwaari",
+                    "audio_ajie": "audio/ajie/Temple_ajië"
+                },
+            ]
+        }
+       
+        const motsAvecTraductionEtAudio = mot_fr.mots.map((français, index) => {
+            const traductionAjie = ajie.mots_ajie[index].mot_ajie;
+            const audioAjie = `<audio controls><source src="${ajie.mots_ajie[index].audio_ajie}.mp3" type="audio/mpeg">Votre navigateur ne supporte pas l'élément audio.</audio>`;
+            return `<p>Mot Français: <b>${français.mot}</b>  </br>Traduction Ajië: <b>${traductionAjie}</b>  ${audioAjie}</p>`;
+        });
+
+        const maxHeight = 200;
+        let popupContent = motsAvecTraductionEtAudio.join('');
+
+if (popupContent.length > maxHeight) {
+    popupContent = `<div style="max-height: ${maxHeight}px; overflow-y: auto;">${popupContent}</div>`;
+}
+        //Création de la carte ou la position par défaut est sur la nouvelle calédonie
+var map = L.map('map').setView([-21, 165], 8);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19,attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
+
+//Création d'un polygon représentant l'aire coutumière Hoot Ma Waap
+var polygon = L.polygon([
+[-19.470855271108757, 162.99380359209962],
+[-19.190254297912254, 163.92350852620675],
+[-20.74061412007148, 165.07012530291067],
+[-21.086330163272518, 164.75579300835778]
+],
+{color: 'red',
+fillColor: '#f03',
+fillOpacity: 0.5}).addTo(map);
+
+//Création d'un polygon représentant l'aire coutumière Paici
+var polygon2 = L.polygon([
+[-21.08594701949646, 164.76519696052512],
+[-20.74165201653377, 165.07843923822156],
+[-21.10844404303498, 165.51414478955664],
+[-21.403376290145662, 165.09951099921255]
+],
+{color: 'green',
+fillColor: '#63E654',
+fillOpacity: 0.5}).addTo(map);
+
+//markers houailou et kouaoua
+var marker = L.marker([-21.276773853269987, 165.62332832023705]).addTo(map);
+var marker2 = L.marker([-21.40301908665857, 165.8270160045663]).addTo(map);
+
+//pop up des langue
+
+marker.bindPopup(popupContent);
+
+// Ajouter un événement de clic sur le marqueur pour ouvrir la popup
+marker.on('click', function() {
+    marker.openPopup();
+});
+
+marker2.bindPopup(popupContent);
+
+// Ajouter un événement de clic sur le marqueur pour ouvrir la popup
+marker2.on('click', function() {
+    marker2.openPopup();
+});
+
+
+//Création d'un polygon représentant l'aire coutumière Ajië
+var polygon3 = L.polygon([
+[-21.407732781156664, 165.1053197337557],
+[-21.1117771094208, 165.52336499284448],
+[-21.31680976649575, 165.80934567998904],
+[-21.808624523282678, 165.70404557271814]
+],
+{color: 'yellow',
+fillColor: '#E1EE18',
+fillOpacity: 0.5}).addTo(map);
+
+//Création d'un polygon représentant l'aire coutumière Xaracuu
+var polygon4 = L.polygon([
+[-21.31680976649575, 165.80934567998904],
+[-21.808624523282678, 165.70404557271814],
+[-22.098321026323784, 166.0325698258741],
+[-21.956119974587224, 166.73045940606627]
+],
+{color: 'purple',
+fillColor: '#A50CA1',
+fillOpacity: 0.5}).addTo(map);
+
+//Création d'un polygon représentant l'aire coutumière Djubéa
+var polygon5 = L.polygon([
+    [-22.098321026323784, 166.0325698258741],
+    [-21.956119974587224, 166.73045940606627],
+    [-22.449384729253705, 167.8698118501479],
+    [-22.919548557526255, 167.398551256678]
+    ],
+    {color: 'pink',
+    fillColor: '#F612AB',
+    fillOpacity: 0.5}).addTo(map);
+
+//Création d'un polygon représentant l'aire coutumière Iaai
+var polygon6 = L.polygon([
+    [-20.36637196444178, 166.4967211150017],
+    [-20.42557782315294, 166.74181432798832],
+    [-20.857506969071512, 166.49482867614623],
+    [-20.71484716578616, 166.33111755368782]
+    ],
+    {color: 'orange',
+    fillColor: '#D67508',
+    fillOpacity: 0.5}).addTo(map);
+
+//Création d'un polygon représentant l'aire coutumière Drehu
+var polygon7 = L.polygon([
+    [-20.557021555894607, 167.0930888545762],
+    [-21.10019827564036, 167.9170447209022],
+    [-21.42706645098738, 167.5667659888086],
+    [-20.943928273402012, 166.8765106132968]
+    ],
+    {color: 'blue',
+    fillColor: '#01D2FA',
+    fillOpacity: 0.5}).addTo(map);
+
+//Création d'un polygon représentant l'aire coutumière Negone
+var polygon8 = L.polygon([
+    [-21.18645886715576, 167.9423320555867],
+    [-21.433169319782422, 168.28230869900497],
+    [-21.742113246487396, 168.07532572091614],
+    [-21.451912002604065, 167.63981867010133]
+    ],
+    {color: 'turquoise',
+    fillColor: '#1ED2C5',
+    fillOpacity: 0.5}).addTo(map);
+    </script>
+</body>
+</html>
